@@ -1,7 +1,8 @@
 package drawing;
 
 public class V2 {
-	double x,y;
+	public double x;
+	public double y;
 //Static convenience methods
 	public static V2 add (V2 vector1, V2 vector2){
 		return new V2(vector1.x+vector2.x, vector1.y+vector2.y);

@@ -14,7 +14,7 @@ public class Ellipse2 {
 		this.height = height;
 	}
 	
-	public Ellipse2D getCircle2D(){
+	public Ellipse2D getEllipse2D(){
 		return new Ellipse2D.Double(center.getX()-width, center.getY()-height, width*2, height*2);
 		
 	}

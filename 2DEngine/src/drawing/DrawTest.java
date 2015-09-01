@@ -16,7 +16,9 @@ public class DrawTest {
 		LinkedList<Ellipse2D> ellipses = new LinkedList<>();
 		
 		Circle2 circle= new Circle2(new Point2D.Double(100, 100), 100);
+		Ellipse2 ellipse = new Ellipse2(new Point2D.Double(200, 200), 50, 40);
 		
+		ellipses.add(ellipse.getEllipse2D());
 		ellipses.add(circle.getCircle2D());
 		frame.getPanel().setEllipses(ellipses);
 		
