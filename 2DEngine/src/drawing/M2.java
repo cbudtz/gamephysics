@@ -32,6 +32,14 @@ public class M2 {
 		this.d*=scalar;
 	}
 	
+	public void mult(M2 m2) {
+		this.a = a*m2.a+b*m2.c;
+		this.b = a*m2.b+b*m2.d;
+		this.c = c*m2.a+d*m2.c;
+		this.d = c*m2.b+d*m2.d;
+		
+	}
+	
 	public static M2 mult(M2 m,double scalar){
 		return new M2(m.a*scalar,m.b*scalar,m.c*scalar,m.d*scalar);
 		
@@ -41,6 +49,13 @@ public class M2 {
 					  m1.c*m2.a+m1.d*m2.c, m1.c*m2.b+m1.d*m2.d);
 
 	}
+	
+	public V2 mult(V2 v) {
+		v.x=this.a*v.x + this.b*v.y;
+		v.y = this.c*v.x + this.d*v.y;
+		return v;
+	}
+	
 	public static V2 dot(M2 m, V2 v){
 
 		return new V2(m.a*v.x + m.b*v.y,
@@ -67,6 +82,10 @@ public class M2 {
 		}
 		return M2.mult(M2.adjugate(this), (1/this.det()));
 	}
+
+
+
+	
 	
 
 }

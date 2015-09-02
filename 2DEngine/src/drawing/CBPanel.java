@@ -29,6 +29,7 @@ public class CBPanel extends JPanel implements ActionListener{
 
 
 	private void doDrawing(Graphics g) {
+		
 		Graphics2D g2 = (Graphics2D) g;
 		if (ellipses !=null){
 			for (Ellipse2D ellipse2d : ellipses) {
@@ -48,6 +49,8 @@ public class CBPanel extends JPanel implements ActionListener{
 		super.paintComponent(g);
 		doDrawing(g);
 	}
+	
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
