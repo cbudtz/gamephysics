@@ -11,57 +11,32 @@ public class M2 {
 		this.d = d;
 	}
 
-	public void add(M2 m){
-		this.a+=m.a;
-		this.b+=m.b;
-		this.c+=m.c;
-		this.d+=m.d;
+	public M2 add(M2 m){
+		return new M2(this.a+m.a,this.b+m.b,
+					  this.c+m.c,this.d+m.d);
 	}
 
-	public void sub(M2 m){
-		this.a-=m.a;
-		this.b-=m.b;
-		this.c-=m.c;
-		this.d-=m.d;
+	public M2 sub(M2 m){
+		return new M2(this.a-m.a, this.b-m.b,
+					  this.c-m.c, this.d-m.d);
 	}
 	
-	public void mult(double scalar){
-		this.a*=scalar;
-		this.b*=scalar;
-		this.c*=scalar;
-		this.d*=scalar;
+	public M2 mult(double scalar){
+		return new M2(this.a*scalar, this.b*scalar,
+					  this.c*scalar, this.d*scalar);
 	}
 	
-	public void mult(M2 m2) {
-		this.a = a*m2.a+b*m2.c;
-		this.b = a*m2.b+b*m2.d;
-		this.c = c*m2.a+d*m2.c;
-		this.d = c*m2.b+d*m2.d;
+	public M2 mult(M2 m2) {
+		return new M2(a*m2.a+b*m2.c, a*m2.b+b*m2.d,
+					  c*m2.a+d*m2.c, c*m2.b+d*m2.d);
 		
-	}
-	
-	public static M2 mult(M2 m,double scalar){
-		return new M2(m.a*scalar,m.b*scalar,m.c*scalar,m.d*scalar);
-		
-	}
-	public static M2 dot(M2 m1, M2 m2){
-		return new M2(m1.a*m2.a+m1.b*m2.c, m1.a*m2.b+m1.b*m2.d,
-					  m1.c*m2.a+m1.d*m2.c, m1.c*m2.b+m1.d*m2.d);
-
 	}
 	
 	public V2 mult(V2 v) {
-		v.x=this.a*v.x + this.b*v.y;
-		v.y = this.c*v.x + this.d*v.y;
-		return v;
+		return new V2(a*v.x + b*v.y,
+					  c*v.x + d*v.y);
 	}
 	
-	public static V2 dot(M2 m, V2 v){
-
-		return new V2(m.a*v.x + m.b*v.y,
-				      m.c*v.x + m.d*v.y);
-
-	}
 	public double det(){
 		return a*d-b*c;
 	}
@@ -71,16 +46,18 @@ public class M2 {
 					  m.b,  m.d);
 	}
 	
-	public static M2 adjugate(M2 m){
-		return new M2(m.d, -m.b,
-					  -m.c, m.a);
+	public M2 adjugate(M2 m){
+		return new M2(d, -b,
+					  -c, a);
 	}
 	
 	public M2 inverse(){
 		if (this.det()==0) {
 			throw new ArithmeticException("No inverse matrix");
 		}
-		return M2.mult(M2.adjugate(this), (1/this.det()));
+		M2 adj = adjugate(this);
+		
+		return adj.mult((1/this.det()));
 	}
 
 

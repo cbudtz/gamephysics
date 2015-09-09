@@ -13,18 +13,19 @@ public class S2 {
 	private LinkedList<Line2> lines;
 	
 	public void flipY(){
-		transformation.mult(new M2(1,0,
-								   0,-1));
+		transformation = transformation.mult(new M2(1,0,
+								   					0,-1));
 	}
 	
 	public void scale(V2 scale){
-		transformation.mult(new M2(scale.x, 0, 0, scale.y));
+		transformation = transformation.mult(new M2(scale.x, 0,
+													0, scale.y));
 	}
 	
 	public V2 transform(V2 vector){
 		vector = transformation.mult(vector);
-		vector.add(origo);
-		return vector;
+		V2 v2 = vector.add(origo);
+		return v2;
 	}
 	
 	public V2 getOrigo() {

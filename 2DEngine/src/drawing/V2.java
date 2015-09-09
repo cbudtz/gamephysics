@@ -14,23 +14,23 @@ public class V2 {
 		this.y = y;
 	}
 	
-	public void add(V2 v2){
-		this.x +=v2.x;
-		this.y +=v2.y;
+	public V2 add(V2 v2){
+		return new V2(this.x +v2.x,
+					  this.y +v2.y);
 	}
 	
-	public void sub(V2 v2){
-		this.x-=v2.x;
-		this.y-=v2.y;
+	public V2 sub(V2 v2){
+		return new V2(this.x-v2.x,
+					  this.y-v2.y);
 	}
-	public void multiply(double scalar){
-		this.x*=scalar;
-		this.y*=scalar;
+	public V2 multiply(double scalar){
+		return new V2(this.x*scalar,
+					  this.y*scalar);
 	}
-	public void divide(double scalar){
-		if (scalar ==0) throw new ArithmeticException("Trying to divide vector by 0 scalar! :" + V2.class);
-		this.x/=scalar;
-		this.x/=scalar;
+	public V2 divide(double scalar){
+		if (scalar ==0) throw new ArithmeticException("Trying to divide vector by 0 scalar! :" + V2.class);		
+		return new V2(this.x/scalar,
+				      this.x/scalar);
 	}
 	public double dot (V2 v2){
 		return this.x*v2.x + this.y*v2.y;
