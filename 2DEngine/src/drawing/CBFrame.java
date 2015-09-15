@@ -22,7 +22,9 @@ public class CBFrame extends JFrame {
 	private void init() {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.panel = new CBPanel();
-		add(panel);
+		add(panel);	
+		setVisible(true);
+		setSize(800, 600);
 	}
 
 

@@ -7,14 +7,15 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.util.LinkedList;
+import java.util.List;
+
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class CBPanel extends JPanel implements ActionListener{
 	private static final long serialVersionUID = 3135592719381820451L;
 	private Timer timer;
-	private LinkedList<Ellipse2D> ellipses;
-	private LinkedList<Line2D> lines;
+	private volatile LinkedList<Line2> lines;
 
 	public CBPanel() {
 		super();
@@ -22,23 +23,13 @@ public class CBPanel extends JPanel implements ActionListener{
 		timer.start();
 	}
 
-	/**
-	 * 
-	 */
-
-
-
 	private void doDrawing(Graphics g) {
 		
 		Graphics2D g2 = (Graphics2D) g;
-		if (ellipses !=null){
-			for (Ellipse2D ellipse2d : ellipses) {
-				g2.draw(ellipse2d);
-			}
-		}
 		if (lines !=null){
-			for (Line2D line2d : lines) {
-				g2.draw(line2d);
+			for (Line2 line2 : lines) {
+				g2.setColor(line2.color);
+				g2.draw(line2.getLine2D());
 			}
 		}
 
@@ -60,19 +51,16 @@ public class CBPanel extends JPanel implements ActionListener{
 
 	//Getters and Setters
 
-	public LinkedList<Ellipse2D> getEllipses() {
-		return ellipses;
-	}
-	public void setEllipses(LinkedList<Ellipse2D> ellipses) {
-		this.ellipses = ellipses;
-	}
-
-	public LinkedList<Line2D> getLines() {
+	public synchronized LinkedList<Line2> getLines() {
 		return lines;
 	}
 
-	public void setLines(LinkedList<Line2D> lines) {
-		this.lines = lines;
+	public synchronized void setLines(List<Line2> lines) {
+		LinkedList<Line2> drawlines = new LinkedList<>();
+		for (Line2 line2 : lines) {
+			drawlines.add(line2);
+		}
+		this.lines = drawlines;
 	}
 	
 }
