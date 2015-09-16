@@ -16,7 +16,7 @@ public class DrawTest {
 
 
 
-		Ellipse2 ellipse = new Ellipse2(new V2(1, 1), 10, 10);
+		Ellipse2 ellipse = new Ellipse2(new V2(1, 1), 2, 2);
 		ArrayList<V2> polyVertices = new ArrayList<>();
 		polyVertices.add(new V2(0,0));
 		polyVertices.add(new V2(2, 0));
@@ -56,7 +56,7 @@ public class DrawTest {
 			List<Line2> drawLines = system.getTransformedLines();
 			frame.getPanel().setLines(drawLines);
 			try {
-				Thread.sleep(1);
+				Thread.sleep(5);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
