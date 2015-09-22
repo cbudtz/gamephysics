@@ -1,5 +1,6 @@
 package drawing;
 import static java.lang.Math.*;
+import static java.lang.System.out;
 
 public class V3 {
 	public double x,y,z = 0;
@@ -75,7 +76,7 @@ public class V3 {
 		p.cross(q).log();
 		p.cross(r).log();
 		r.cross(q).log();
-		System.out.println(p.cross(r).mult(q));
+		out.println(p.cross(r).mult(q));
 		q.mult(r.cross(p));
 		p.cross(r).cross(q).log();
 		System.out.println("\n");
