@@ -6,9 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Polygon2 implements Drawable2 {
-	private ArrayList<V2> vertices;
-	V2 anchorPoint;
-	private S2 modelSystem = new S2();
+	protected ArrayList<V2> vertices;
+	protected V2 anchorPoint;
+	protected S2 modelSystem = new S2();
 	public Color color=Color.BLACK;
 	
 	public Polygon2(ArrayList<V2> vertices, V2 anchorPoint) {
@@ -58,7 +58,7 @@ public class Polygon2 implements Drawable2 {
 
 	@Override
 	public void moveOrigo(V2 displacement) {
-		modelSystem.setOrigo(modelSystem.getOrigo().add(displacement));
+		//modelSystem.setOrigo(modelSystem.getOrigo().add(displacement));
 		ArrayList<V2> newVertices = new ArrayList<>();
 		for (V2 v2 : vertices) {
 			newVertices.add(v2.sub(displacement));
