@@ -12,6 +12,10 @@ public class Line3 {
 		this.endpoint = endpoint;
 		this.color=color;
 	}
+	@Override
+	public String toString() {
+		return "Line3 [startpoint=" + startpoint + ", endpoint=" + endpoint + ", color=" + color + "]";
+	}
 	
 	
 	
