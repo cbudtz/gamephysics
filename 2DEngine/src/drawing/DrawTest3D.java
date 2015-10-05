@@ -52,7 +52,6 @@ public class DrawTest3D implements ActionListener{
 
 
 		DrawTest3D test = new DrawTest3D(polys);
-		cube.modelSystem.setRotationXY(PI/10000);
 
 
 
