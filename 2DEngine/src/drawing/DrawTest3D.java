@@ -13,14 +13,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DrawTest3D implements ActionListener{
-	public Timer t = new Timer(10, this);
+	public Timer t = new Timer(1, this);
 	private long millitime;
-	Polygon3 cube;
+	LinkedList<Polygon3> polys;
 	S2 system;
 	CBFrame frame = new CBFrame();
-	
-	public DrawTest3D(Polygon3 cube) {
-		this.cube=cube;
+
+	public DrawTest3D(LinkedList<Polygon3> polys) {
+		this.polys=polys;
 		this.t.start();
 		millitime=System.currentTimeMillis();
 		this.system= new S2();
@@ -45,28 +45,36 @@ public class DrawTest3D implements ActionListener{
 		lineConnections.add(new Integer[]{1,5});
 		lineConnections.add(new Integer[]{2,6});
 		lineConnections.add(new Integer[]{3,7});
-		
 		Polygon3 cube = new Polygon3(vertices, lineConnections, new V3(0, 0, 0));
-		DrawTest3D test = new DrawTest3D(cube);
-			cube.modelSystem.setRotationXY(PI/10000);
-			
-		
+		//Polygons
+		LinkedList<Polygon3> polys = new LinkedList<>();
+		polys.add(cube);
+
+
+		DrawTest3D test = new DrawTest3D(polys);
+		cube.modelSystem.setRotationXY(PI/10000);
+
+
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		double time = (System.currentTimeMillis()-millitime)/1000.0;		
-		cube.modelSystem.setRotationXY(PI*time);
-		cube.modelSystem.setRotationXZ(PI*time/2);
-		cube.modelSystem.setRotationYZ(PI*time/6);
-
-		LinkedList<Line2> flatLines = cube.getFlattenedLines();
+		double time = (System.currentTimeMillis()-millitime)/1000.0;
+		LinkedList<Line2> flatLines = new LinkedList<>();
+		for (Polygon3 polygon3 : polys) {
+			polygon3.modelSystem.setRotationXY(PI*time);
+			polygon3.modelSystem.setRotationXZ(PI*time/2);
+			polygon3.modelSystem.setRotationYZ(PI*time/6);
+			flatLines.addAll(polygon3.getFlattenedLines());
+		}
+		
+		 
 		system.setLines(flatLines);
 
 		List<Line2> drawlines = system.getTransformedLines();
 		frame.getPanel().setLines(drawlines);
-		
+
 	}
 
 }
