@@ -16,6 +16,10 @@ public class Line2 {
 	public Line2D getLine2D(){
 		return new Line2D.Double(startpoint.x,startpoint.y,endpoint.x,endpoint.y);
 	}
+	@Override
+	public String toString() {
+		return "Line2 [startpoint=" + startpoint + ", endpoint=" + endpoint + ", color=" + color + "]";
+	}
 	
 	
 	

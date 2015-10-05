@@ -33,6 +33,10 @@ public class Polygon3 implements Drawable3 {
 		return modelSystem.getTransformedLines();
 		
 	}
+	
+	public LinkedList<Line2> getFlattenedLines(){
+		return modelSystem.getOrthoLines();
+	}
 
 	private void updateLines() {
 		//Connect the dots
