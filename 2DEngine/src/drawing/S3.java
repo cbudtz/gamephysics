@@ -120,6 +120,16 @@ public class S3 {
 		return lines;
 	}
 	
+	public LinkedList<Line2> getOrthoLines(){
+		LinkedList<Line3> transLines = getTransformedLines();
+		LinkedList<Line2> flattenedLines = new LinkedList<>();
+		for (Line3 line3 : transLines) {
+			flattenedLines.add(new Line2(new V2(line3.startpoint.y, line3.startpoint.z), 
+										 new V2(line3.endpoint.y, line3.endpoint.z), line3.color));
+		}
+		return flattenedLines;
+	}
+	
 	public static void main(String[] args){
 		S3 system = new S3();
 		LinkedList<Line3> lines = new LinkedList<>();
