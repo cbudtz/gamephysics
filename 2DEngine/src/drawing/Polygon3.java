@@ -11,7 +11,7 @@ public class Polygon3 implements Drawable3 {
 	private LinkedList<Integer[]> connections;
 	protected V3 anchorPoint;
 	public S3 modelSystem = new S3(); //TODO protection
-	public Color color=Color.BLACK;
+	public Color color=Color.ORANGE.darker();
 	
 	
 	public Polygon3(ArrayList<V3> vertices, LinkedList<Integer[]> lineConnections,V3 anchorPoint) {
