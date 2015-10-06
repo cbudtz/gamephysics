@@ -1,68 +1,68 @@
 package drawing;
 
-import java.awt.Color;
-import java.util.ArrayList;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
+import static java.lang.Math.*;
 
-public class DrawSolarSystem {
+import javax.swing.Timer;
+
+public class DrawSolarSystem implements ActionListener {
+	S2 solarSystem = new S2();
+	long startTime;
+	Timer t = new Timer(1, this);
+	CBFrame frame = new CBFrame();
+	S2 earthSystem = new S2();
+	private static Drawable2 moon;
+	private static Ellipse2 earth;
+	private static Drawable2 sun;
+
+	
+	public DrawSolarSystem(){
+		startTime=System.currentTimeMillis();
+		t.start();
+		solarSystem.flipY();
+		solarSystem.scale(new V2(5, 5));
+		solarSystem.setOrigo(new V2(400, 300));
+	}
+	
 
 	public static void main(String[] args) {
-		CBFrame frame = new CBFrame();
+		DrawSolarSystem simulation = new DrawSolarSystem();
+		sun = new Ellipse2(new V2(-5, 0),10,10);
+		earth = new Ellipse2(new V2(0,0),2,2);
+		moon = new Ellipse2(new V2(4,0), 1,1);
+	}
+	
+	//Update simulation
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//Time 1 sek = 1 day
+		double timeStep = (System.currentTimeMillis()-startTime)/365000.0;
+		timeStep*=60;
+		//EarthSystem
+		List<Line2> moonLines = moon.getLines();
+		List<Line2> earthLines = earth.getLines();
+		earthLines.addAll(moonLines);
+		earthSystem.setLines(earthLines);
+		//Update Rotation and placement for earth
+		earthSystem.setRotation(2*PI*timeStep*13);
+		earthSystem.setOrigo(new V2(40,0));
+		//SolarSystem
+		List<Line2> solarLines = sun.getLines();
+		solarLines.addAll(earthSystem.getTransformedLines());
+		
+		solarSystem.setLines(solarLines);
+		//Rotate Solar System
+		solarSystem.setRotation(2*PI*timeStep);
+		//Draw the result
+		frame.getPanel().setLines(solarSystem.getTransformedLines());
+		
+		
+		
 
-
-
-		Ellipse2 ellipse = new Ellipse2(new V2(1, 1), 2, 2);
-		ArrayList<V2> polyVertices = new ArrayList<>();
-		polyVertices.add(new V2(0,0));
-		polyVertices.add(new V2(2, 0));
-		polyVertices.add(new V2(2, 2));
-		polyVertices.add(new V2(0, 2));
-		Polygon2 polygon = new Polygon2(polyVertices,new V2(1,1));
-		Polygon2 polygon2 = polygon.copy();
-
-		S2 system = new S2();
-		system.flipY();
-		system.scale(new V2(20, 20));
-		system.setOrigo(new V2(400, 300));
-
-		for (int i = 0; i < 100000; i++) {
-			//		Manipulating model
-			polygon.moveOrigo(new V2(0.0000001*i, 0));
-			polygon.setRotation(i*Math.PI/1000);
-			//moving model
-			polygon.move(new V2(0.0001, 0.0001));
-			polygon.color=Color.RED;
-			
-			polygon2.shear(new V2(i*.001, 0));
-			polygon2.reflect(false, true);
-			polygon2.color = Color.BLUE;
-			ellipse.move(new V2(-0.0001, -0.0001));
-			ellipse.moveOrigo(new V2(0.0000001*i, 0));
-			ellipse.setRotation(i*Math.PI/1000);
-
-			LinkedList<Drawable2> drawables = new LinkedList<>();
-			drawables.add(ellipse);
-			drawables.add(polygon);
-			drawables.add(polygon2);
-			LinkedList<Line2> lines = new LinkedList<>();
-			for (Drawable2 drawable2 : drawables) {
-				for (Line2 line2 : drawable2.getLines()) {
-					lines.add(line2);
-				}
-			}
-			lines.add(new Line2(new V2(1, 1), new V2(2, 2), Color.black));
-			system.setLines(lines);
-			List<Line2> drawLines = system.getTransformedLines();
-			frame.getPanel().setLines(drawLines);
-			try {
-				Thread.sleep(2);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
+		
 	}
 
 }
