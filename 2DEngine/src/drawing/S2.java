@@ -18,7 +18,7 @@ public class S2 {
 	private M2 transformation = new M2(	1, 0, 
 										0, 1);
 
-	private LinkedList<Line2> lines;
+	private List<Line2> lines;
 	//Transformation Matrices
 	public void flipY(){
 		F = F.mult(new M2(1,0,0,-1));
@@ -69,7 +69,7 @@ public class S2 {
 		this.origo = origo;
 	}
 
-	public void setLines(LinkedList<Line2> lines) {
+	public void setLines(List<Line2> lines) {
 		this.lines = lines;
 	}
 	
@@ -83,7 +83,7 @@ public class S2 {
 		return transLines;
 	}
 
-	public  LinkedList<Line2> getlines() {
+	public  List<Line2> getlines() {
 		// TODO Auto-generated method stub
 		return lines;
 	}

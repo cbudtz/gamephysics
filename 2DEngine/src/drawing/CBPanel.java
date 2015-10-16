@@ -19,7 +19,7 @@ public class CBPanel extends JPanel implements ActionListener{
 
 	public CBPanel() {
 		super();
-		timer = new Timer(25, this);
+		timer = new Timer(5, this);
 		timer.start();
 	}
 
