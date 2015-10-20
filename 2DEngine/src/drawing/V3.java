@@ -17,7 +17,7 @@ public class V3 {
 	}
 	
 
-	private V3 sub(V3 v) {
+	public V3 sub(V3 v) {
 		return new V3(x-v.x,y-v.y,z-v.z);
 		
 	}
