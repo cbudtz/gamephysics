@@ -43,6 +43,7 @@ public class Camera {
 		//transform into camera coordinates
 		V3 EP = point.sub(E);
 		V3 transPoint = RUD.mult(EP);
+		//Projection
 		return new V2(transPoint.x*pDist/transPoint.z, transPoint.y*pDist/transPoint.z);
 	}
 
