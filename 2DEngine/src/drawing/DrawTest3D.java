@@ -72,9 +72,12 @@ public class DrawTest3D implements ActionListener{
 		LinkedList<Line3> modelLines = new LinkedList<>();
 		LinkedList<Line2> flatLines = new LinkedList<>();
 		for (Polygon3 polygon3 : polys) {
-			System.out.println(timeStep);
+			//Physics
+			System.out.println("Time elapsed: " + timeElapsed+ ", speed: " + sqrt(obj3d.velocity.x*obj3d.velocity.x+obj3d.velocity.z*obj3d.velocity.z));
 			obj3d.velocity = obj3d.velocity.add(new V3(-2.35*timeStep*sin(PI/9), 0, -2.35*timeStep*cos(PI/9)));
+			//cam.setFocusPoint(obj3d.center);
 			obj3d.updatePos(timeStep);
+			//Graphics
 			polygon3.anchorPoint = obj3d.center;
 			System.out.println(polygon3.anchorPoint);
 //			flatLines.addAll(polygon3.getFlattenedLines());
