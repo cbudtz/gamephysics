@@ -24,7 +24,7 @@ public class CBFrame extends JFrame {
 		this.panel = new CBPanel();
 		add(panel);	
 		setVisible(true);
-		setSize(800, 600);
+		setSize(1200, 900);
 	}
 
 

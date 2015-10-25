@@ -23,7 +23,7 @@ public class DrawTest3D implements ActionListener{
 	Obj3d obj3d = new Obj3d();
 
 	public DrawTest3D(LinkedList<Polygon3> polys) {
-		obj3d.center = new V3(10, 0, 0);
+		obj3d.center = new V3(50, 0, 0);
 		this.polys=polys;
 		this.t.start();
 		millitimeStart=System.currentTimeMillis();
@@ -31,7 +31,7 @@ public class DrawTest3D implements ActionListener{
 		this.system= new S2();
 		system.flipY();
 		system.scale(new V2(40, 40));
-		system.setOrigo(new V2(400, 300));
+		system.setOrigo(new V2(600, 450));
 		cam = new Camera(new S2());
 		//cam.setFocusPoint(new V3(2, 2, 2)); //Focus on Cube
 	}
@@ -74,7 +74,7 @@ public class DrawTest3D implements ActionListener{
 		for (Polygon3 polygon3 : polys) {
 			//Physics
 			System.out.println("Time elapsed: " + timeElapsed+ ", speed: " + sqrt(obj3d.velocity.x*obj3d.velocity.x+obj3d.velocity.z*obj3d.velocity.z));
-			obj3d.velocity = obj3d.velocity.add(new V3(-2.35*timeStep*sin(PI/9), 0, -2.35*timeStep*cos(PI/9)));
+			obj3d.velocity = obj3d.velocity.add(new V3(-2.35*timeStep*sin(PI/3), 0, -2.35*timeStep*cos(PI/3)));
 			//cam.setFocusPoint(obj3d.center);
 			obj3d.updatePos(timeStep);
 			//Graphics

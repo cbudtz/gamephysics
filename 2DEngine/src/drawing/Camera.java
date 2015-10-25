@@ -11,7 +11,7 @@ public class Camera {
 	
 	//Projection Plane
 	S2 screen; 
-	double pDist = -50; //Projection distance
+	double pDist = -10; //Projection distance
 
 	//Camera system
 	V3 E = new V3(0, 0, 40); //Camera Placement
