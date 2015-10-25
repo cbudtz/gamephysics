@@ -14,22 +14,26 @@ import java.awt.event.ActionListener;
 
 public class DrawTest3D implements ActionListener{
 	public Timer t = new Timer(1, this);
-	private long millitime;
+	private long millitimeStart;
+	private long prevTime;
 	LinkedList<Polygon3> polys;
 	S2 system;
 	Camera cam;
 	CBFrame frame = new CBFrame();
+	Obj3d obj3d = new Obj3d();
 
 	public DrawTest3D(LinkedList<Polygon3> polys) {
+		obj3d.center = new V3(10, 0, 0);
 		this.polys=polys;
 		this.t.start();
-		millitime=System.currentTimeMillis();
+		millitimeStart=System.currentTimeMillis();
+		prevTime=millitimeStart;
 		this.system= new S2();
 		system.flipY();
 		system.scale(new V2(40, 40));
 		system.setOrigo(new V2(400, 300));
 		cam = new Camera(new S2());
-		cam.setFocusPoint(new V3(2, 2, 2)); //Focus on Cube
+		//cam.setFocusPoint(new V3(2, 2, 2)); //Focus on Cube
 	}
 
 	public static void main(String[] args) {
@@ -62,13 +66,17 @@ public class DrawTest3D implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		double time = (System.currentTimeMillis()-millitime)/1000.0;
+		double timeElapsed = (System.currentTimeMillis()-millitimeStart)/1000.0;
+		double timeStep = (System.currentTimeMillis()-prevTime)/1000.0;
+		prevTime = System.currentTimeMillis();
 		LinkedList<Line3> modelLines = new LinkedList<>();
 		LinkedList<Line2> flatLines = new LinkedList<>();
 		for (Polygon3 polygon3 : polys) {
-			polygon3.modelSystem.setRotationXY(PI*time);
-			polygon3.modelSystem.setRotationXZ(PI*time/2);
-			polygon3.modelSystem.setRotationYZ(PI*time/6);
+			System.out.println(timeStep);
+			obj3d.velocity = obj3d.velocity.add(new V3(-2.35*timeStep*sin(PI/9), 0, -2.35*timeStep*cos(PI/9)));
+			obj3d.updatePos(timeStep);
+			polygon3.anchorPoint = obj3d.center;
+			System.out.println(polygon3.anchorPoint);
 //			flatLines.addAll(polygon3.getFlattenedLines());
 			modelLines.addAll(polygon3.getTransformedLines());
 		}

@@ -30,7 +30,10 @@ public class Polygon3 implements Drawable3 {
 	};
 	@Override
 	public List<Line3> getTransformedLines() {
-		return modelSystem.getTransformedLines();
+		LinkedList<Line3> modelLines = modelSystem.getTransformedLines();
+		modelLines.forEach(v -> v.endpoint = v.endpoint.add(anchorPoint));
+		modelLines.forEach(v -> v.startpoint = v.startpoint.add(anchorPoint));
+		return modelLines;
 		
 	}
 	
