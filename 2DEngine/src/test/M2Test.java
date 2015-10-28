@@ -19,6 +19,11 @@ public class M2Test {
 		assertEquals(m2.d,0,0);
 	}
 
+	private void assertEquals(double a, int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Test
 	public void testSub() {
 		M2 m = new M2(10, 0, 5, 0);
@@ -87,6 +92,11 @@ public class M2Test {
 		assertEquals(b,m.b,0.1);
 		assertEquals(c,m.c,0.1);
 		assertEquals(d,m.d,0.1);
+	}
+
+	private void assertEquals(double b, double b2, double d) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

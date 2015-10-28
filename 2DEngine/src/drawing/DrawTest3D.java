@@ -1,7 +1,6 @@
 package drawing;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class DrawTest3D implements ActionListener{
 	Obj3d obj3d = new Obj3d();
 
 	public DrawTest3D(LinkedList<Polygon3> polys) {
-		obj3d.center = new V3(50, 0, 0);
+		obj3d.center = new V3(0, 41.15, 0);
 		this.polys=polys;
 		this.t.start();
 		millitimeStart=System.currentTimeMillis();
@@ -37,25 +36,12 @@ public class DrawTest3D implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		ArrayList<V3> vertices = new ArrayList<>();
-		vertices.add(new V3(0,3,0));//Base 1
-		vertices.add(new V3(0,3,2));
-		vertices.add(new V3(0,5,2));
-		vertices.add(new V3(0,5,0));
-
-		vertices.add(new V3(2,3,0));//Top 1
-		vertices.add(new V3(2,3,2));
-		vertices.add(new V3(2,5,2));
-		vertices.add(new V3(2,5,0));
-		LinkedList<Integer[]> lineConnections = new LinkedList<>();
-		lineConnections.add(new Integer[]{0,1,2,3,0,4,5,6,7,4});
-		lineConnections.add(new Integer[]{1,5});
-		lineConnections.add(new Integer[]{2,6});
-		lineConnections.add(new Integer[]{3,7});
-		Polygon3 cube = new Polygon3(vertices, lineConnections, new V3(0, 0, 0));
+		//Polygon3 cube = makeCube();
+		Polygon3 man = makeMan();
 		//Polygons
 		LinkedList<Polygon3> polys = new LinkedList<>();
-		polys.add(cube);
+		//polys.add(cube);
+		polys.add(man);
 
 
 		DrawTest3D test = new DrawTest3D(polys);
@@ -63,6 +49,48 @@ public class DrawTest3D implements ActionListener{
 
 
 	}
+
+	private static Polygon3 makeCube() {
+		ArrayList<V3> cubevertices = new ArrayList<>();
+		cubevertices.add(new V3(0,3,0));//Base 1
+		cubevertices.add(new V3(0,3,2));
+		cubevertices.add(new V3(0,5,2));
+		cubevertices.add(new V3(0,5,0));
+
+		cubevertices.add(new V3(2,3,0));//Top 1
+		cubevertices.add(new V3(2,3,2));
+		cubevertices.add(new V3(2,5,2));
+		cubevertices.add(new V3(2,5,0));
+		LinkedList<Integer[]> cubelineConnections = new LinkedList<>();
+		cubelineConnections.add(new Integer[]{0,1,2,3,0,4,5,6,7,4});
+		cubelineConnections.add(new Integer[]{1,5});
+		cubelineConnections.add(new Integer[]{2,6});
+		cubelineConnections.add(new Integer[]{3,7});
+		Polygon3 cube = new Polygon3(cubevertices, cubelineConnections, new V3(0, 0, 0));
+		return cube;
+	}
+	
+	private static Polygon3 makeMan() {
+		ArrayList<V3> manVertices = new ArrayList<>();
+		manVertices.add(new V3(0,0,0)); //0
+		manVertices.add(new V3(4,0,0));//1
+		manVertices.add(new V3(2,2,0));//2
+		manVertices.add(new V3(0,4,0));//3
+		manVertices.add(new V3(4,4,0));//4
+		manVertices.add(new V3(2,5,0));//5
+		manVertices.add(new V3(3,6,0));//6
+		manVertices.add(new V3(2,7,0));//7
+		manVertices.add(new V3(1,6,0));//8
+		
+		LinkedList<Integer[]> cubelineConnections = new LinkedList<>();
+		cubelineConnections.add(new Integer[]{0,2,1});//Legs
+		cubelineConnections.add(new Integer[]{2,5,6,7,8,5});//Body + Head
+		cubelineConnections.add(new Integer[]{3,4}); //arms
+		Polygon3 man = new Polygon3(manVertices, cubelineConnections, new V3(0, 0, 0));
+		man.modelSystem.scale(new V3(0.3, 0.3, 0.3));
+		return man;
+	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -74,7 +102,7 @@ public class DrawTest3D implements ActionListener{
 		for (Polygon3 polygon3 : polys) {
 			//Physics
 			System.out.println("Time elapsed: " + timeElapsed+ ", speed: " + sqrt(obj3d.velocity.x*obj3d.velocity.x+obj3d.velocity.z*obj3d.velocity.z));
-			obj3d.velocity = obj3d.velocity.add(new V3(-2.35*timeStep*sin(PI/3), 0, -2.35*timeStep*cos(PI/3)));
+			obj3d.velocity = obj3d.velocity.add(new V3(0, -9.803*timeStep, 0));
 			//cam.setFocusPoint(obj3d.center);
 			obj3d.updatePos(timeStep);
 			//Graphics
