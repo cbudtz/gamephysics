@@ -22,10 +22,10 @@ public class Projectile implements ActionListener {
 		tstart = System.currentTimeMillis();
 		t.start();
 		try {
-			Thread.sleep(5000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
-			System.out.println("Interrupted");
-			//e.printStackTrace();
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 
@@ -37,7 +37,7 @@ public class Projectile implements ActionListener {
 		System.out.println("t: " + elapsed + " "+x + ","+y);
 		if (y<0){
 			t.stop();
-			Thread.currentThread().notifyAll();
+			System.exit(1);;
 		}
 	}
 }
