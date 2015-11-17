@@ -8,7 +8,7 @@ import java.util.List;
 import static java.lang.Math.*;
 
 public class Ellipse2 extends Polygon2{
-	private static final int STEPFACTOR = 8;
+	private static final int STEPFACTOR = 1;
 	private V2 center;
 	private double width, height;
 	public Color color= Color.BLACK;
