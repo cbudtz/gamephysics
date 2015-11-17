@@ -23,7 +23,7 @@ public class DrawComet implements ActionListener
 	private Obj2d cometBody2 = new Obj2d();
 	private S2 system;
 	private LinkedList<Drawable2> drawables;
-	private Timer timer = new Timer(10, this);
+	private Timer timer = new Timer(1, this);
 	private long prevTime;
 	private Ellipse2 comet2;
 
@@ -83,6 +83,7 @@ public class DrawComet implements ActionListener
 		long now = System.currentTimeMillis();
 		
 		double timeStep = ((now - prevTime)/1000.0)*SimSpeedFactor;
+		if (System.currentTimeMillis()%100==0)System.out.println(now-prevTime);
 		double cometDist = sqrt(pow(cometBody.center.x,2)+pow(cometBody.center.y,2));
 		double cometAcc = (5.97*10000000000000.0*6.6726)/pow(cometDist,2);
 		cometBody.acceleration.x =  - (cometBody.center.x/cometDist)*cometAcc;
@@ -92,7 +93,6 @@ public class DrawComet implements ActionListener
 		double cometAcc2 = (5.97*10000000000000.0*6.6726)/pow(cometDist2,2);
 		cometBody2.acceleration.x =  - (cometBody2.center.x/cometDist2)*cometAcc2;
 		cometBody2.acceleration.y =  - (cometBody2.center.y/cometDist2)*cometAcc2;
-		System.out.println();
 		
 		cometBody.updatePos(timeStep);
 		cometBody2.updatePos(timeStep);

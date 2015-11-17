@@ -8,7 +8,7 @@ import java.util.List;
 import static java.lang.Math.*;
 
 public class Ellipse2 extends Polygon2{
-	private static final int STEPFACTOR = 1;
+	private static final double STEPFACTOR = 0.01;
 	private V2 center;
 	private double width, height;
 	public Color color= Color.BLACK;
@@ -29,6 +29,7 @@ public class Ellipse2 extends Polygon2{
 		for (Line2 line2 : modelLines) {
 			worldLines.add(new Line2(line2.startpoint.add(anchorPoint), line2.endpoint.add(anchorPoint), line2.color));
 		}
+//		if (System.currentTimeMillis()%100==0) System.out.println(worldLines.size());
 		return worldLines;
 	
 	}
