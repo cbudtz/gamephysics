@@ -12,7 +12,8 @@ public class DrawTest {
 
 
 
-		Ellipse2 ellipse = new Ellipse2(new V2(1, 1), 2, 2);
+		Ellipse2 earth = new Ellipse2(new V2(0, 0), 1, 1);
+		Ellipse2 comet = new Ellipse2(new V2(100,0), 0.1,0.1);
 		ArrayList<V2> polyVertices = new ArrayList<>();
 		polyVertices.add(new V2(0,0));
 		polyVertices.add(new V2(2, 0));
@@ -27,22 +28,22 @@ public class DrawTest {
 		system.setOrigo(new V2(400, 300));
 
 		for (int i = 0; i < 100000; i++) {
-			//		Manipulating model
+//					Manipulating model
 			polygon.moveOrigo(new V2(0.0000001*i, 0));
 			polygon.setRotation(i*Math.PI/1000);
-			//moving model
+			moving model
 			polygon.move(new V2(0.0001, 0.0001));
 			polygon.color=Color.RED;
 			
 			polygon2.shear(new V2(i*.001, 0));
 			polygon2.reflect(false, true);
 			polygon2.color = Color.BLUE;
-			ellipse.move(new V2(-0.0001, -0.0001));
-			ellipse.moveOrigo(new V2(0.0000001*i, 0));
-			ellipse.setRotation(i*Math.PI/1000);
+			earth.move(new V2(-0.0001, -0.0001));
+			earth.moveOrigo(new V2(0.0000001*i, 0));
+			earth.setRotation(i*Math.PI/1000);
 
 			LinkedList<Drawable2> drawables = new LinkedList<>();
-			drawables.add(ellipse);
+			drawables.add(earth);
 			drawables.add(polygon);
 			drawables.add(polygon2);
 			LinkedList<Line2> lines = new LinkedList<>();

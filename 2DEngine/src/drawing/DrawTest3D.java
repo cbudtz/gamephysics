@@ -36,12 +36,12 @@ public class DrawTest3D implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		//Polygon3 cube = makeCube();
-		Polygon3 man = makeMan();
+		Polygon3 cube = makeCube();
+		//Polygon3 man = makeMan();
 		//Polygons
 		LinkedList<Polygon3> polys = new LinkedList<>();
 		//polys.add(cube);
-		polys.add(man);
+//		polys.add(man);
 
 
 		DrawTest3D test = new DrawTest3D(polys);
