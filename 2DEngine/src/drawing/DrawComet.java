@@ -20,10 +20,12 @@ public class DrawComet implements ActionListener
 	private Ellipse2 geostationary;
 	private Ellipse2 comet;
 	private Obj2d cometBody = new Obj2d();
+	private Obj2d cometBody2 = new Obj2d();
 	private S2 system;
 	private LinkedList<Drawable2> drawables;
 	private Timer timer = new Timer(10, this);
 	private long prevTime;
+	private Ellipse2 comet2;
 
 	public static void main(String[] args) {
 		new DrawComet().run();
@@ -44,9 +46,14 @@ public class DrawComet implements ActionListener
 		double cometSpeed = 15000*1000/3600.0; //m/s
 		cometBody.center = new V2(6378000*100, 0);
 		cometBody.velocity = new V2(cometSpeed*cos(toRadians(175)),cometSpeed*sin(toRadians(175)));
+		
+		cometBody2.center= new V2(6378000*7, 0);
+		cometBody2.velocity = new V2(0, cometSpeed/2);
+		
 		earth = new Ellipse2(new V2(0, 0), 6378000, 6378000);
 		geostationary = new Ellipse2(new V2(0, 0), 6.62*6378000, 6.62*6378000);
 		comet = new Ellipse2(cometBody.center, 6378000/10, 6378000/10);
+		comet2 = new Ellipse2(cometBody2.center, 6378000/10, 6378000/10);
 
 		system = new S2();
 		system.flipY();
@@ -74,19 +81,32 @@ public class DrawComet implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		long now = System.currentTimeMillis();
+		
 		double timeStep = ((now - prevTime)/1000.0)*SimSpeedFactor;
 		double cometDist = sqrt(pow(cometBody.center.x,2)+pow(cometBody.center.y,2));
 		double cometAcc = (5.97*10000000000000.0*6.6726)/pow(cometDist,2);
 		cometBody.acceleration.x =  - (cometBody.center.x/cometDist)*cometAcc;
 		cometBody.acceleration.y =  - (cometBody.center.y/cometDist)*cometAcc;
-//		System.out.print(cometBody.acceleration.x + ", ");
-//		System.out.println(cometBody.acceleration.y);
+		//Extra Comet
+		double cometDist2 = sqrt(pow(cometBody2.center.x,2)+pow(cometBody2.center.y,2));
+		double cometAcc2 = (5.97*10000000000000.0*6.6726)/pow(cometDist2,2);
+		cometBody2.acceleration.x =  - (cometBody2.center.x/cometDist2)*cometAcc2;
+		cometBody2.acceleration.y =  - (cometBody2.center.y/cometDist2)*cometAcc2;
+		System.out.println();
+		
 		cometBody.updatePos(timeStep);
+		cometBody2.updatePos(timeStep);
+		
 		prevTime=now;
+		
 		comet.anchorPoint=cometBody.center;
+		comet2.anchorPoint=cometBody2.center;
 		
 		LinkedList<Line2> lines = new LinkedList<>();
 		for (Line2 line2 : comet.getLines()) {
+			lines.add(line2);
+		}
+		for (Line2 line2 : comet2.getLines()) {
 			lines.add(line2);
 		}
 		for (Line2 line2 : earth.getLines()){
